@@ -1,0 +1,46 @@
+Vagrant.configure("2") do |config|
+
+  if Vagrant.has_plugin? "vagrant-vbguest"
+    config.vbguest.no_install  = true
+    config.vbguest.auto_update = false
+    config.vbguest.no_remote   = true
+  end
+
+   config.vm.define :servidorUbuntu1 do |servidorUbuntu1|
+   servidorUbuntu1.vm.box = "bento/ubuntu-22.04"
+   servidorUbuntu1.vm.network :private_network, ip: "192.168.100.2"
+   servidorUbuntu1.vm.hostname = "servidorUbuntu1"
+   servidorUbuntu1.vm.boot_timeout = 1800
+   servidorUbuntu1.vm.provision "shell", path: "Scripts/serv_ubuntu.sh"
+
+
+  end
+
+   config.vm.define :servidorUbuntu2 do |servidorUbuntu2|
+   servidorUbuntu2.vm.box = "bento/ubuntu-22.04"
+   servidorUbuntu2.vm.network :private_network, ip: "192.168.100.3"
+   servidorUbuntu2.vm.hostname = "servidorUbuntu2"
+   servidorUbuntu2.vm.boot_timeout = 1800
+   servidorUbuntu2.vm.provision "shell", path: "Scripts/serv_ubuntu.sh"
+
+
+  end
+
+   config.vm.define :servidorUbuntu3 do |servidorUbuntu3|
+   servidorUbuntu3.vm.box = "bento/ubuntu-22.04"
+   servidorUbuntu3.vm.network :private_network, ip: "192.168.100.4"
+   servidorUbuntu3.vm.hostname = "servidorUbuntu3"
+   servidorUbuntu3.vm.boot_timeout = 1800
+   servidorUbuntu3.vm.provision "shell", path: "Scripts/serv_ubuntu.sh"
+
+
+  end
+   config.vm.define :servidorHaproxy do |servidorHaproxy|
+   servidorHaproxy.vm.box = "bento/ubuntu-22.04"
+   servidorHaproxy.vm.network :private_network, ip: "192.168.100.5"
+   servidorHaproxy.vm.hostname = "servidorHaproxy"
+   servidorHaproxy.vm.boot_timeout = 1800
+   servidorHaproxy.vm.provision "shell", path: "Scripts/serv_haproxy.sh"
+
+  end
+end  
